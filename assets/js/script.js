@@ -1,6 +1,8 @@
 const searchForm = document.querySelector(".search-form");
 const inputValue = document.querySelector(".input-value");
-const currentDay = document.querySelector("#current-day")
+const currentDay = document.querySelector("#current-day");
+const fiveDayItem = document.querySelector("#five-day-item");
+const fiveDay = document.querySelector('#five-day');
 
 
   // on button click the user input is passed into the API, API returns data into the runLatLon function
@@ -49,19 +51,45 @@ function displayWeatherData(data, cityName){
   let displayHumidity = document.createElement("p");
   let displayUVI = document.createElement("p");
  
-
   displayCity.textContent = cityName;
   displayTemp.textContent = "Temp: " + currentTemp;
   displayWind.textContent = "Wind: " + currentWind + " MPH";
   displayHumidity.textContent = "Humidity " + currentHumidity + "%";
   displayUVI.textContent = "UV Index " + currentUVI;
 
-
   currentDay.append(displayCity);
   currentDay.append(displayTemp);
   currentDay.append(displayWind);
   currentDay.append(displayHumidity);
   currentDay.append(displayUVI);
+
+  for (let i = 0; i < 5; i++) {
+    let fiveDayTemp = data.daily[i].temp.day;
+    let fiveDayWind = data.daily[i].wind_speed;
+    let fiveDayHumidity = data.daily[i].humidity;
+    let fiveDayUVI = data.daily[i].uvi;
+
+    let displayFiveDay = document.createElement('div');
+    displayFiveDay.setAttribute('id', 'five-day-item');
+    displayFiveDay.setAttribute('class', 'col-2');
+
+    let displayFiveTemp = document.createElement("p");
+    let displayFiveWind = document.createElement("p");
+    let displayFiveHumidity = document.createElement("p");
+    let displayFiveUVI = document.createElement("p");
+
+    displayFiveTemp.textContent = 'Temp: ' + fiveDayTemp;
+    displayFiveWind.textContent = 'Wind: ' + fiveDayWind + 'MPH';
+    displayFiveHumidity.textContent = 'Humidity' + fiveDayHumidity + '%';
+    displayFiveUVI.textContent = 'UV Index' + fiveDayUVI;
+
+    fiveDay.append(displayFiveDay);
+    displayFiveDay.append(displayFiveTemp);
+    displayFiveDay.append(displayFiveWind);
+    displayFiveDay.append(displayFiveHumidity);
+    displayFiveDay.append(displayFiveUVI);
+
+  }
 
 };
 

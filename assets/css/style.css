@@ -10,3 +10,9 @@ header{
 #current-day {
     border: solid black 3px;
 }
+#five-day {
+    justify-content: space-around;
+}
+#five-day-item{
+    border: solid black 3px;
+}
