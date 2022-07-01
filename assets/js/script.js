@@ -4,8 +4,9 @@ const currentDay = document.querySelector("#current-day");
 const fiveDayItem = document.querySelector("#five-day-item");
 const fiveDay = document.querySelector('#five-day');
 const fiveDayText = document.querySelector('.five-day-text');
-
-
+const cityDisplay = document.querySelector('.city-display')
+let cityList = [];
+let d = 0;
 
 
   // on button click the user input is passed into the API, API returns data into the runLatLon function
@@ -14,6 +15,11 @@ function buttonClickHandler(event){
     fetch('http://api.openweathermap.org/geo/1.0/direct?q='+ inputValue.value +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
     .then(function(response) {
         if (response.ok) {
+          // adds user input to the local storage in the form of a string so multiple values can be saved in one key
+          cityList.push(inputValue.value);
+          localStorage.setItem("city", JSON.stringify(cityList));
+          addToCityList()
+
           response.json().then(function(data) {
             runLatLon(data);
           });
@@ -43,6 +49,10 @@ function runLatLon(data) {
 };
 
 function displayWeatherData(data, cityName){
+// clears old html if it exists from a previous run
+  currentDay.innerHTML = '';
+  fiveDay.innerHTML = '';
+
   let currentDate = moment().format('ll');
   let currentTemp = data.current.temp;
   let currentWind = data.current.wind_speed;
@@ -105,5 +115,25 @@ function displayWeatherData(data, cityName){
 
 };
 
+function displayCityList (){
+  let cityListEl = JSON.parse( localStorage.getItem('city') );
 
+  for (let i = 0; i < cityListEl.length; i++){
+    let cityEl = document.createElement('button');
+    cityEl.textContent = cityListEl[i];
+    cityDisplay.append(cityEl);
+    console.log(cityListEl);
+  }
+  
+};
+function addToCityList() {
+    let cityListEl = JSON.parse( localStorage.getItem('city') );
+    let cityEl = document.createElement('button');
+    cityEl.textContent = cityListEl[d];
+    cityDisplay.append(cityEl);
+    d = d + 1;
+}
+
+
+displayCityList ();
 searchForm.addEventListener("submit", buttonClickHandler);
