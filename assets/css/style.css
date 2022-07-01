@@ -7,12 +7,21 @@ header{
     padding: 15px;
     text-align: center;
 }
-#current-day {
+.search-form{
     border: solid black 3px;
+    padding: 20px;
+}
+#current-day-style {
+    border: solid black 3px;
+    padding: 15px;
+}
+.five-day-text{
+    padding: 15px;
 }
 #five-day {
     justify-content: space-around;
 }
 #five-day-item{
     border: solid black 3px;
+    padding: 15px;
 }

@@ -3,6 +3,7 @@ const inputValue = document.querySelector(".input-value");
 const currentDay = document.querySelector("#current-day");
 const fiveDayItem = document.querySelector("#five-day-item");
 const fiveDay = document.querySelector('#five-day');
+const fiveDayText = document.querySelector('.five-day-text');
 
 
   // on button click the user input is passed into the API, API returns data into the runLatLon function
@@ -45,7 +46,9 @@ function displayWeatherData(data, cityName){
   let currentHumidity = data.current.humidity;
   let currentUVI = data.current.uvi;
 
-  let displayCity = document.createElement("h2");
+  currentDay.setAttribute("id", "current-day-style");
+
+  let displayCity = document.createElement("h3");
   let displayTemp = document.createElement("p");
   let displayWind = document.createElement("p");
   let displayHumidity = document.createElement("p");
@@ -63,6 +66,8 @@ function displayWeatherData(data, cityName){
   currentDay.append(displayHumidity);
   currentDay.append(displayUVI);
 
+  fiveDayText.textContent = "Five Day Forecast:";
+
   for (let i = 0; i < 5; i++) {
     let fiveDayTemp = data.daily[i].temp.day;
     let fiveDayWind = data.daily[i].wind_speed;
@@ -78,10 +83,10 @@ function displayWeatherData(data, cityName){
     let displayFiveHumidity = document.createElement("p");
     let displayFiveUVI = document.createElement("p");
 
-    displayFiveTemp.textContent = 'Temp: ' + fiveDayTemp;
-    displayFiveWind.textContent = 'Wind: ' + fiveDayWind + 'MPH';
-    displayFiveHumidity.textContent = 'Humidity' + fiveDayHumidity + '%';
-    displayFiveUVI.textContent = 'UV Index' + fiveDayUVI;
+    displayFiveTemp.textContent = "Temp: " + fiveDayTemp;
+    displayFiveWind.textContent = "Wind: " + fiveDayWind + " MPH";
+    displayFiveHumidity.textContent = "Humidity " + fiveDayHumidity + "%";
+    displayFiveUVI.textContent = "UV Index: " + fiveDayUVI;
 
     fiveDay.append(displayFiveDay);
     displayFiveDay.append(displayFiveTemp);
