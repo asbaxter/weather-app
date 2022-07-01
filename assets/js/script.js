@@ -76,7 +76,7 @@ function displayWeatherData(data, cityName){
 
     let displayFiveDay = document.createElement('div');
     displayFiveDay.setAttribute('id', 'five-day-item');
-    displayFiveDay.setAttribute('class', 'col-2');
+    displayFiveDay.setAttribute('class', 'col-12 col-md-2');
 
     let displayFiveTemp = document.createElement("p");
     let displayFiveWind = document.createElement("p");
