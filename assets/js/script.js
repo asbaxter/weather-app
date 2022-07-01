@@ -6,6 +6,8 @@ const fiveDay = document.querySelector('#five-day');
 const fiveDayText = document.querySelector('.five-day-text');
 
 
+
+
   // on button click the user input is passed into the API, API returns data into the runLatLon function
 function buttonClickHandler(event){
     event.preventDefault();
@@ -41,6 +43,7 @@ function runLatLon(data) {
 };
 
 function displayWeatherData(data, cityName){
+  let currentDate = moment().format('ll');
   let currentTemp = data.current.temp;
   let currentWind = data.current.wind_speed;
   let currentHumidity = data.current.humidity;
@@ -54,7 +57,7 @@ function displayWeatherData(data, cityName){
   let displayHumidity = document.createElement("p");
   let displayUVI = document.createElement("p");
  
-  displayCity.textContent = cityName;
+  displayCity.textContent = cityName + " (" + currentDate + ")";
   displayTemp.textContent = "Temp: " + currentTemp;
   displayWind.textContent = "Wind: " + currentWind + " MPH";
   displayHumidity.textContent = "Humidity " + currentHumidity + "%";
@@ -69,6 +72,7 @@ function displayWeatherData(data, cityName){
   fiveDayText.textContent = "Five Day Forecast:";
 
   for (let i = 0; i < 5; i++) {
+    let fiveDate = moment().add(i+1, 'days').format('ll');
     let fiveDayTemp = data.daily[i].temp.day;
     let fiveDayWind = data.daily[i].wind_speed;
     let fiveDayHumidity = data.daily[i].humidity;
@@ -78,17 +82,20 @@ function displayWeatherData(data, cityName){
     displayFiveDay.setAttribute('id', 'five-day-item');
     displayFiveDay.setAttribute('class', 'col-12 col-md-2');
 
+    let displayFiveDate = document.createElement("h4")
     let displayFiveTemp = document.createElement("p");
     let displayFiveWind = document.createElement("p");
     let displayFiveHumidity = document.createElement("p");
     let displayFiveUVI = document.createElement("p");
 
+    displayFiveDate.textContent = fiveDate;
     displayFiveTemp.textContent = "Temp: " + fiveDayTemp;
     displayFiveWind.textContent = "Wind: " + fiveDayWind + " MPH";
     displayFiveHumidity.textContent = "Humidity " + fiveDayHumidity + "%";
     displayFiveUVI.textContent = "UV Index: " + fiveDayUVI;
 
     fiveDay.append(displayFiveDay);
+    displayFiveDay.append(displayFiveDate);
     displayFiveDay.append(displayFiveTemp);
     displayFiveDay.append(displayFiveWind);
     displayFiveDay.append(displayFiveHumidity);
