@@ -18,7 +18,7 @@ function buttonClickHandler(event){
           // adds user input to the local storage in the form of a string so multiple values can be saved in one key
           cityList.push(inputValue.value);
           localStorage.setItem("city", JSON.stringify(cityList));
-          addToCityList()
+          addToCityList(d)
 
           response.json().then(function(data) {
             runLatLon(data);
@@ -117,22 +117,25 @@ function displayWeatherData(data, cityName){
 
 function displayCityList (){
   let cityListEl = JSON.parse( localStorage.getItem('city') );
-
-  for (let i = 0; i < cityListEl.length; i++){
-    let cityEl = document.createElement('button');
-    cityEl.textContent = cityListEl[i];
-    cityDisplay.append(cityEl);
-    console.log(cityListEl);
+  if (cityListEl !== null){
+    for (let i = 0; i < cityListEl.length; i++){
+      let cityEl = document.createElement('button');
+      cityEl.textContent = cityListEl[i];
+      cityDisplay.append(cityEl);
+      console.log(cityListEl);
+    }
+  }
+  else{
+    return;
   }
   
 };
-function addToCityList() {
+function addToCityList(d) {
     let cityListEl = JSON.parse( localStorage.getItem('city') );
     let cityEl = document.createElement('button');
     cityEl.textContent = cityListEl[d];
     cityDisplay.append(cityEl);
-    d = d + 1;
-}
+};
 
 
 displayCityList ();
