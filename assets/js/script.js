@@ -58,10 +58,16 @@ function displayWeatherData(data, cityName){
   let currentWind = data.current.wind_speed;
   let currentHumidity = data.current.humidity;
   let currentUVI = data.current.uvi;
+  let weatherIcon = data.current.weather[0].icon;
+  let iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
 
   currentDay.setAttribute("id", "current-day-style");
 
   let displayCity = document.createElement("h3");
+
+  let displayIcon = document.createElement("img");
+  displayIcon.src = iconUrl;
+
   let displayTemp = document.createElement("p");
   let displayWind = document.createElement("p");
   let displayHumidity = document.createElement("p");
@@ -74,6 +80,7 @@ function displayWeatherData(data, cityName){
   displayUVI.textContent = "UV Index " + currentUVI;
 
   currentDay.append(displayCity);
+  displayCity.append(displayIcon);
   currentDay.append(displayTemp);
   currentDay.append(displayWind);
   currentDay.append(displayHumidity);
