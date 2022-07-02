@@ -1,19 +1,45 @@
 *{
     margin: 0;
 }
+body{
+    background-color: #E3E3E3;
+}
+.btn {
+    display: inline-block;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #5098E6;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+.btn:hover {background-color: #396CA3}
+
+.btn:active {
+  background-color: #396CA3;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 header{
-    background-image: linear-gradient(darkblue, lightblue);
-    color: white;
     padding: 15px;
     text-align: center;
 }
 .search-form{
-    border: solid black 3px;
+    border: solid black 2px;
     padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px black;
 }
 #current-day-style {
-    border: solid black 3px;
+    border: solid black 2px;
     padding: 15px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px black;
 }
 .five-day-text{
     padding: 15px;
@@ -22,9 +48,48 @@ header{
     justify-content: space-around;
 }
 #five-day-item{
-    border: solid black 3px;
+    border: solid black 2px;
     padding: 15px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px black;
+    background-color: #999;
+    color: white;
 }
 #city-button{
-    padding: 15px;
+    display: inline-block;
+    margin: 10px;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #5098E6;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+#city-button:hover {background-color: #396CA3}
+
+#city-button:active {
+  background-color: #396CA3;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#low-uvi{
+    background-color: green;
+    width: 125px;
+    border-radius: 20px;
+}
+#med-uvi{
+    background-color: yellow;
+    width: 125px;
+    border-radius: 20px;
+}
+#high-uvi{
+    background-color: red;
+    width: 125px;
+    border-radius: 20px;
 }

@@ -64,14 +64,22 @@ function displayWeatherData(data, cityName){
   currentDay.setAttribute("id", "current-day-style");
 
   let displayCity = document.createElement("h3");
-
   let displayIcon = document.createElement("img");
   displayIcon.src = iconUrl;
-
   let displayTemp = document.createElement("p");
   let displayWind = document.createElement("p");
   let displayHumidity = document.createElement("p");
   let displayUVI = document.createElement("p");
+
+  if (currentUVI <= 2){
+    displayUVI.setAttribute("id", "low-uvi");
+  }
+  else if (currentUVI <= 7){
+    displayUVI.setAttribute("id", "med-uvi");
+  }
+  else {
+    displayUVI.setAttribute("id", "high-uvi");
+  }
  
   displayCity.textContent = cityName + " (" + currentDate + ")";
   displayTemp.textContent = "Temp: " + currentTemp;
@@ -93,7 +101,6 @@ function displayWeatherData(data, cityName){
     let fiveDayTemp = data.daily[i].temp.day;
     let fiveDayWind = data.daily[i].wind_speed;
     let fiveDayHumidity = data.daily[i].humidity;
-    let fiveDayUVI = data.daily[i].uvi;
     let fiveDayIcon = data.daily[i].weather[0].icon;
     let FiveDayIconUrl = `http://openweathermap.org/img/wn/${fiveDayIcon}.png`;
 
@@ -107,13 +114,11 @@ function displayWeatherData(data, cityName){
     let displayFiveTemp = document.createElement("p");
     let displayFiveWind = document.createElement("p");
     let displayFiveHumidity = document.createElement("p");
-    let displayFiveUVI = document.createElement("p");
 
     displayFiveDate.textContent = fiveDate;
     displayFiveTemp.textContent = "Temp: " + fiveDayTemp;
     displayFiveWind.textContent = "Wind: " + fiveDayWind + " MPH";
     displayFiveHumidity.textContent = "Humidity " + fiveDayHumidity + "%";
-    displayFiveUVI.textContent = "UV Index: " + fiveDayUVI;
 
     fiveDay.append(displayFiveDay);
     displayFiveDay.append(displayFiveDate);
@@ -121,7 +126,6 @@ function displayWeatherData(data, cityName){
     displayFiveDay.append(displayFiveTemp);
     displayFiveDay.append(displayFiveWind);
     displayFiveDay.append(displayFiveHumidity);
-    displayFiveDay.append(displayFiveUVI);
 
   }
 
