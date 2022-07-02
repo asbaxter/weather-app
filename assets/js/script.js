@@ -12,7 +12,7 @@ let d = 0;
   // on button click the user input is passed into the API, API returns data into the runLatLon function
 function buttonClickHandler(event){
     event.preventDefault();
-    fetch('http://api.openweathermap.org/geo/1.0/direct?q='+ inputValue.value +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
+    fetch('https://api.openweathermap.org/geo/1.0/direct?q='+ inputValue.value +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
     .then(function(response) {
         if (response.ok) {
           // adds user input to the local storage in the form of a string so multiple values can be saved in one key
@@ -59,7 +59,7 @@ function displayWeatherData(data, cityName){
   let currentHumidity = data.current.humidity;
   let currentUVI = data.current.uvi;
   let weatherIcon = data.current.weather[0].icon;
-  let iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
+  let iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}.png`;
 
   currentDay.setAttribute("id", "current-day-style");
 
@@ -102,7 +102,7 @@ function displayWeatherData(data, cityName){
     let fiveDayWind = data.daily[i].wind_speed;
     let fiveDayHumidity = data.daily[i].humidity;
     let fiveDayIcon = data.daily[i].weather[0].icon;
-    let FiveDayIconUrl = `http://openweathermap.org/img/wn/${fiveDayIcon}.png`;
+    let FiveDayIconUrl = `https://openweathermap.org/img/wn/${fiveDayIcon}.png`;
 
     let displayFiveDay = document.createElement('div');
     displayFiveDay.setAttribute('id', 'five-day-item');
@@ -159,7 +159,7 @@ function addToCityList() {
 
 function cityButtonClick(event){
   let previousCity = event.target.innerHTML;
-  fetch('http://api.openweathermap.org/geo/1.0/direct?q='+ previousCity +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
+  fetch('https://api.openweathermap.org/geo/1.0/direct?q='+ previousCity +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
   .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
