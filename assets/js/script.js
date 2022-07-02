@@ -94,12 +94,16 @@ function displayWeatherData(data, cityName){
     let fiveDayWind = data.daily[i].wind_speed;
     let fiveDayHumidity = data.daily[i].humidity;
     let fiveDayUVI = data.daily[i].uvi;
+    let fiveDayIcon = data.daily[i].weather[0].icon;
+    let FiveDayIconUrl = `http://openweathermap.org/img/wn/${fiveDayIcon}.png`;
 
     let displayFiveDay = document.createElement('div');
     displayFiveDay.setAttribute('id', 'five-day-item');
     displayFiveDay.setAttribute('class', 'col-12 col-md-2');
 
     let displayFiveDate = document.createElement("h4")
+    let displayFiveIcon = document.createElement("img");
+    displayFiveIcon.src = FiveDayIconUrl;
     let displayFiveTemp = document.createElement("p");
     let displayFiveWind = document.createElement("p");
     let displayFiveHumidity = document.createElement("p");
@@ -113,6 +117,7 @@ function displayWeatherData(data, cityName){
 
     fiveDay.append(displayFiveDay);
     displayFiveDay.append(displayFiveDate);
+    displayFiveDate.append(displayFiveIcon);
     displayFiveDay.append(displayFiveTemp);
     displayFiveDay.append(displayFiveWind);
     displayFiveDay.append(displayFiveHumidity);
