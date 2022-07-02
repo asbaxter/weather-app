@@ -1,10 +1,10 @@
 const searchForm = document.querySelector(".search-form");
-const inputValue = document.querySelector(".input-value");
+let inputValue = document.querySelector(".input-value");
 const currentDay = document.querySelector("#current-day");
 const fiveDayItem = document.querySelector("#five-day-item");
 const fiveDay = document.querySelector('#five-day');
 const fiveDayText = document.querySelector('.five-day-text');
-const cityDisplay = document.querySelector('.city-display')
+const cityDisplay = document.querySelector('.city-display');
 let cityList = [];
 let d = 0;
 
@@ -18,7 +18,7 @@ function buttonClickHandler(event){
           // adds user input to the local storage in the form of a string so multiple values can be saved in one key
           cityList.push(inputValue.value);
           localStorage.setItem("city", JSON.stringify(cityList));
-          addToCityList(d)
+          addToCityList()
 
           response.json().then(function(data) {
             runLatLon(data);
@@ -121,8 +121,9 @@ function displayCityList (){
     for (let i = 0; i < cityListEl.length; i++){
       let cityEl = document.createElement('button');
       cityEl.textContent = cityListEl[i];
+      cityEl.setAttribute("id", "city-button");
+      cityEl.setAttribute("class", "col-12");
       cityDisplay.append(cityEl);
-      console.log(cityListEl);
     }
   }
   else{
@@ -130,13 +131,36 @@ function displayCityList (){
   }
   
 };
-function addToCityList(d) {
+function addToCityList() {
     let cityListEl = JSON.parse( localStorage.getItem('city') );
     let cityEl = document.createElement('button');
     cityEl.textContent = cityListEl[d];
+    d++;
+    cityEl.setAttribute("id", "city-button");
+    cityEl.setAttribute("class", "col-12");
     cityDisplay.append(cityEl);
+};
+
+function cityButtonClick(event){
+  let previousCity = event.target.innerHTML;
+  fetch('http://api.openweathermap.org/geo/1.0/direct?q='+ previousCity +'&limit=1&appid=dd2013fa50ff58801aff47ba696348c0')
+  .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          runLatLon(data);
+        });
+      } else {
+        alert('City not found');
+      }
+  });
 };
 
 
 displayCityList ();
 searchForm.addEventListener("submit", buttonClickHandler);
+cityDisplay.addEventListener("click", cityButtonClick);
+
+
+
+
+
